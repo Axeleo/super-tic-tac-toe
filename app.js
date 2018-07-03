@@ -73,4 +73,22 @@ function checkWin(playerStr) {
 gameBoard.addEventListener('click', placeToken)
 
 // 4 Create a reset feature
+function removePlayerClass(object) {
+  object.classList.remove('blue-player')
+  object.classList.remove('red-player')
+}
+function resetBoard() {
+  var row1 = document.querySelector('.row1')
+  var row2 = document.querySelector('.row2')
+  var row3 = document.querySelector('.row3')
+  for (var i = 0; i < 3; i++){
+    removePlayerClass(row1.children[i])
+    removePlayerClass(row2.children[i])
+    removePlayerClass(row3.children[i])
+  }
+ 
+}
+
+
+
 // 5 Create a score board
