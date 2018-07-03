@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+main{
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid red;
+}
+.row1,
+.row2,
+.row3 {
+  display: flex;
+  border: 1px solid grey;
+}
+.column1,
+.column2,
+.column3 {
+  background-color: papayawhip;
+  border:3px dotted salmon;
+  height: 100px;
+  width: 100px;
+}
+.blue-player{
+  background-color: blue;
+}
+.red-player{
+  background-color: red;
+}
