@@ -2,13 +2,30 @@
   box-sizing: border-box;
 }
 main{
-  width: 300px;
+  width: 900px;
   margin: 0 auto;
   border: 1px solid red;
+}
+.game-square{
+  height: 80px;
+  width: 80px;
+}
+.game-boards-first-row,
+.game-boards-second-row,
+.game-boards-third-row {
+  border: 1px solid blue;
+  display: flex;
+  height: 100%;
+}
+.game-boards-first-col,
+.game-boards-second-col,
+.game-boards-third-col {
+  width: 100%;
 }
 .row1,
 .row2,
 .row3 {
+  height: 33%;
   display: flex;
   border: 1px solid grey;
 }
@@ -17,8 +34,6 @@ main{
 .column3 {
   background-color: papayawhip;
   border:3px dotted salmon;
-  height: 100px;
-  width: 100px;
 }
 .blue-player{
   background-color: blue;
