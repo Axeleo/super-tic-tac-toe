@@ -2,13 +2,24 @@
   box-sizing: border-box;
 }
 main{
-  width: 900px;
+  width: 1000px;
   margin: 0 auto;
-  border: 1px solid red;
+  display: flex;
+   justify-content: space-around;
+  flex-wrap: wrap;
 }
-.game-square{
-  height: 80px;
-  width: 80px;
+.game-board {
+  height: 300px;
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.game-square {
+  height: 100px;
+  width: 100px;
+  background-color: papayawhip;
+  border:3px dotted salmon;
 }
 .game-boards-first-row,
 .game-boards-second-row,
