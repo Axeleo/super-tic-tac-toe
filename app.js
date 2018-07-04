@@ -59,31 +59,35 @@ function placeToken(event) {
 
 // Each if statement checks the 8 possible win variations on the particular game board
 function checkWin(gameBoardIdentity, playerStr) {
-  //checking rows
-  if (gameBoardIdentity.children[0].children[0].classList.contains(playerStr) && gameBoardIdentity.children[0].children[1].classList.contains(playerStr) && gameBoardIdentity.children[0].children[2].classList.contains(playerStr)) {
+  
+  var firstRow = gameBoardIdentity.children[0]
+  var secondRow = gameBoardIdentity.children[1]
+  var thirdRow = gameBoardIdentity.children[2]
+  // checking rows
+  if (firstRow.children[0].classList.contains(playerStr) && firstRow.children[1].classList.contains(playerStr) && firstRow.children[2].classList.contains(playerStr)) {
     console.log(playerStr + ' Victory')
   }
-  if (gameBoardIdentity.children[1].children[0].classList.contains(playerStr) && gameBoardIdentity.children[1].children[1].classList.contains(playerStr) && gameBoardIdentity.children[1].children[2].classList.contains(playerStr)) {
+  else if (secondRow.children[0].classList.contains(playerStr) && secondRow.children[1].classList.contains(playerStr) && secondRow.children[2].classList.contains(playerStr)) {
     console.log(playerStr + ' Victory')
   }
-  if (gameBoardIdentity.children[2].children[0].classList.contains(playerStr) && gameBoardIdentity.children[2].children[1].classList.contains(playerStr) && gameBoardIdentity.children[2].children[2].classList.contains(playerStr)) {
+  else if (thirdRow.children[0].classList.contains(playerStr) && thirdRow.children[1].classList.contains(playerStr) && thirdRow.children[2].classList.contains(playerStr)) {
     console.log(playerStr + ' Victory')
   }
-  //checking cols
-  if (gameBoardIdentity.children[0].children[0].classList.contains(playerStr) && gameBoardIdentity.children[1].children[0].classList.contains(playerStr) && gameBoardIdentity.children[2].children[0].classList.contains(playerStr)) {
+  // checking cols
+  else if (gameBoardIdentity.children[0].children[0].classList.contains(playerStr) && secondRow.children[0].classList.contains(playerStr) && thirdRow.children[0].classList.contains(playerStr)) {
     console.log(playerStr + ' Victory')
   }
-  if (gameBoardIdentity.children[0].children[1].classList.contains(playerStr) && gameBoardIdentity.children[1].children[1].classList.contains(playerStr) && gameBoardIdentity.children[2].children[1].classList.contains(playerStr)) {
+  else if (gameBoardIdentity.children[0].children[1].classList.contains(playerStr) && secondRow.children[1].classList.contains(playerStr) && thirdRow.children[1].classList.contains(playerStr)) {
     console.log(playerStr + ' Victory')
   }
-  if (gameBoardIdentity.children[0].children[2].classList.contains(playerStr) && gameBoardIdentity.children[1].children[2].classList.contains(playerStr) && gameBoardIdentity.children[2].children[2].classList.contains(playerStr)) {
+  else if (gameBoardIdentity.children[0].children[2].classList.contains(playerStr) && secondRow.children[2].classList.contains(playerStr) && thirdRow.children[2].classList.contains(playerStr)) {
     console.log(playerStr + ' Victory')
   }
   // checking diagonals
-  if (gameBoardIdentity.children[0].children[0].classList.contains(playerStr) && gameBoardIdentity.children[1].children[1].classList.contains(playerStr) && gameBoardIdentity.children[2].children[2].classList.contains(playerStr)) {
+  else if (gameBoardIdentity.children[0].children[0].classList.contains(playerStr) && secondRow.children[1].classList.contains(playerStr) && thirdRow.children[2].classList.contains(playerStr)) {
     console.log(playerStr + ' Victory')
   }
-  if (gameBoardIdentity.children[0].children[2].classList.contains(playerStr) && gameBoardIdentity.children[1].children[1].classList.contains(playerStr) && gameBoardIdentity.children[2].children[0].classList.contains(playerStr)) {
+  else if (gameBoardIdentity.children[0].children[2].classList.contains(playerStr) && secondRow.children[1].classList.contains(playerStr) && thirdRow.children[0].classList.contains(playerStr)) {
     console.log(playerStr + ' Victory')
   }
 }
@@ -113,3 +117,9 @@ document.body.addEventListener('click', placeToken)
 
 // 5 Create a score board
 
+// 6 Relative board selector
+
+function relativeBoardSelect(event) {
+  // if a square is clicked transfer to relative board
+  // move position
+}
