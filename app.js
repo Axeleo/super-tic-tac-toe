@@ -8,14 +8,10 @@ var winningCombinations = [[1, 2, 3], [4, 5,6], [7, 8, 9], [1, 4, 7], [2, 5, 8],
 
 var bluePlayerNestArr = []
 var redPlayerNestArr = []
-
 var bluePlayerMetaArr = []
 var redPlayerMetaArr = []
-
-allGameBoards.forEach(function () {
-  bluePlayerNestArr.push([])
-  redPlayerNestArr.push([])
-})
+var playerBlueWinCount
+var playerRedWinCount
 
 var playersTurn = 'red-player'
 
@@ -58,16 +54,23 @@ function checkWin(gameBoardIndex, playerName, playerNestArr, playerMetaArr) {
   for (let index = 0; index < playerNestArr[gameBoardIndex].length; index++) {
     for (let winningIndex = 0; winningIndex < winningCombinations.length; winningIndex++) {    
       if (playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][0]) && playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][1]) && playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][2])) {
-        console.log(playerName + ' Victory' + gameBoardIndex)
+        console.log(playerName + ' Victory on board ' + (gameBoardIndex + 1))
         bluePlayerNestArr[gameBoardIndex].push('finished')
         redPlayerNestArr[gameBoardIndex].push('finished')
         playerMetaArr.push(gameBoardIndex + 1)
+        checkMetaWin(playerMetaArr, playerName)
         return
       }
     }
   }
 }
-
+function checkMetaWin(playerMetaArr, playerName) {
+  for (let winningIndex = 0; winningIndex < winningCombinations.length; winningIndex++) {
+    if (playerMetaArr.includes(winningCombinations[winningIndex][0]) && playerMetaArr.includes(winningCombinations[winningIndex][1]) && playerMetaArr.includes(winningCombinations[winningIndex][2])) {
+      console.log(playerName + ' Grand Victory')
+    }
+  }
+}
 // 3 Create a reset feature
 function removePlayerClass(object) {
   object.classList.remove('blue-player')
@@ -95,7 +98,7 @@ function initiateAllListeners() {
 // 5 Create a score board
 
 // 6 Relative board selector
-function boardFocus(gameBoardIndex, gameBoardSelect) {
+function boardFocus(gameBoardSelect) {
   for (let index = 0; index < allGameBoards.length; index++) {
     allGameBoards[index].removeEventListener('click', placeToken)
   }
@@ -103,7 +106,7 @@ function boardFocus(gameBoardIndex, gameBoardSelect) {
 }
 function focusUnfinishedBoards() {
   for (let index = 0; index < allGameBoards.length; index++) {
-    if (allGameBoards[index].includes('finished')){
+    if (bluePlayerNestArr[index].includes('finished')){
       allGameBoards[index].removeEventListener('click', placeToken)
     } else {
       allGameBoards[index].addEventListener('click', placeToken)
@@ -114,7 +117,9 @@ function relativeBoardSelect(gameBoardIndex, gameBoardSelect) {
   if (bluePlayerNestArr[gameBoardIndex].includes('finished') === true){
     focusUnfinishedBoards()
   } else {
-    boardFocus(gameBoardIndex, gameBoardSelect)
+    boardFocus(gameBoardSelect)
   }
 }
+// Call Functions 
 initiateAllListeners()
+resetGameArray()
