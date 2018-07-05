@@ -1,50 +1,59 @@
 * {
   box-sizing: border-box;
 }
-main{
-  width: 1000px;
+body {
+  font-family: 'Rubik Mono One',
+  sans-serif;
+}
+.wrapper {
+  width: 860px;
   margin: 0 auto;
   display: flex;
-   justify-content: space-around;
+  flex-direction: row;
+  justify-content: center;
+}
+aside {
+  width: 100px;
+  display: flex;
+  margin: 0 20px;
+}
+main {
+  width: 560px;
+  display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 .game-board {
-  height: 300px;
-  width: 300px;
+  height: 180px;
+  width: 180px;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 10px;
 }
 .game-square {
-  height: 100px;
-  width: 100px;
+  height: 60px;
+  width: 60px;
   background-color: papayawhip;
-  border:3px dotted salmon;
+  border: 3px dotted salmon;
 }
-.game-boards-first-row,
-.game-boards-second-row,
-.game-boards-third-row {
-  border: 1px solid blue;
+header {
+  margin: 0 auto;
+  text-align: center;
+  flex-direction: column;
   display: flex;
-  height: 100%;
+  margin: 20px 0;
 }
-.game-boards-first-col,
-.game-boards-second-col,
-.game-boards-third-col {
-  width: 100%;
-}
-.row1,
-.row2,
-.row3 {
-  height: 33%;
+.options-bar {
   display: flex;
-  border: 1px solid grey;
+  justify-content: center;
 }
-.column1,
-.column2,
-.column3 {
-  background-color: papayawhip;
-  border:3px dotted salmon;
+.options-bar div {
+  padding: 1em;
+}
+button {
+  border: none;
+  font-family: 'Rubik Mono One',
+  sans-serif;
 }
 .blue-player{
   background-color: blue;

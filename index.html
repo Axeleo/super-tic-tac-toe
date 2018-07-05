@@ -5,10 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Super tic-tac-toe</title>
-    <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron|Rubik+Mono+One" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="">
 </head>
 <body>
+  <header>
+    <h1>SUPER<br>TIC TAC TOE</h1>
+    <span class="options-bar">
+        <div>Instructions</div>
+        <div><button>Sound off</button></div>
+        <div>New round</div>
+    </span>
+  </header>
   <div class="wrapper">
+    <aside class="red-player-sideboard">
+      <p>red-player</p>
+    </aside>
     <main class="meta-game-board">
       <div class="game-board" data-board='1'>
         <div class="game-square" data-cell='1'></div>
@@ -110,6 +123,9 @@
         <div class="game-square" data-cell='9'></div>
       </div>
     </main>
+    <aside class="blue-player-sideboard">
+      <p>blue-player</p>
+    </aside>
   </div>
   <script src="app.js"></script>
 </body>
