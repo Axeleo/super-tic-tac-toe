@@ -4,6 +4,8 @@
 body {
   font-family: 'Rubik Mono One',
   sans-serif;
+  color: white;
+  background-color: black;
 }
 .wrapper {
   width: 860px;
@@ -54,6 +56,10 @@ button {
   border: none;
   font-family: 'Rubik Mono One',
   sans-serif;
+}
+.blue-player-sideboard {
+  border-left: 4px dotted;
+  border-color: 
 }
 .blue-player{
   background-color: blue;
