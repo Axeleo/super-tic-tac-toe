@@ -93,6 +93,11 @@ function removePlayerClass(object) {
   object.classList.remove('yellow-player')
   object.classList.remove('unfocus')
 }
+function removeHoverAnimationEffect(square) {
+  square.classList.remove('shadow-pop-tr-blue')
+  square.classList.remove('shadow-pop-tr-yellow')
+  square.removeEventListener('mouseover', hoverAnimation)
+}
 function resetGameArray() {
   bluePlayerNestArr = []
   yellowPlayerNestArr = []
@@ -120,13 +125,13 @@ function boardFocus(gameBoardSelect) {
     allGameBoards[index].removeEventListener('click', placeToken)
     allGameBoards[index].classList.add('unfocus')
     for (let secondIndex = 0; secondIndex < allGameBoards[index].length; secondIndex++) {
-      allGameBoards[index].children[secondIndex].removeEventListener('mouseover', hoverAnimation)
+      removeHoverAnimationEffect(allGameBoards[index].children[secondIndex])
     }
   }
   allGameBoards[gameBoardSelect - 1].addEventListener('click', placeToken)
   allGameBoards[gameBoardSelect - 1].classList.remove('unfocus')
   for (let thirdIndex = 0; thirdIndex < allGameBoards[gameBoardSelect - 1].length; thirdIndex++) {
-    allGameSquares[index].children[thirdIndex].addEventListener('mouseover', hoverAnimation)
+    allGameBoards[index].children[thirdIndex].addEventListener('mouseover', hoverAnimation)
   }
 }
 function focusUnfinishedBoards() {
@@ -135,7 +140,7 @@ function focusUnfinishedBoards() {
       allGameBoards[index].removeEventListener('click', placeToken)
       allGameBoards[index].classList.add('unfocus')
       for (let index = 0; index < allGameBoards[index].length; index++) {
-        allGameSquares[index].removeEventListener('mouseover', hoverAnimation)
+        removeHoverAnimationEffect(allGameSquares[index])
       }
     } else {
       allGameBoards[index].addEventListener('click', placeToken)
