@@ -1,6 +1,56 @@
 * {
   box-sizing: border-box;
 }
+@-webkit-keyframes shadow-pop-tr-yellow {
+  0% {
+    box-shadow: 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405;
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0)
+  }
+  100% {
+    box-shadow: 1px -1px #edc405, 2px -2px #edc405, 3px -3px #edc405, 4px -4px #edc405, 5px -5px #edc405, 6px -6px #edc405, 7px -7px #edc405, 8px -8px #edc405;
+    -webkit-transform: translateX(-8px) translateY(8px);
+    transform: translateX(-8px) translateY(8px)
+  }
+}
+
+@keyframes shadow-pop-tr-yellow {
+  0% {
+    box-shadow: 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405;
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0)
+  }
+  100% {
+    box-shadow: 1px -1px #edc405, 2px -2px #edc405, 3px -3px #edc405, 4px -4px #edc405, 5px -5px #edc405, 6px -6px #edc405, 7px -7px #edc405, 8px -8px #edc405;
+    -webkit-transform: translateX(-8px) translateY(8px);
+    transform: translateX(-8px) translateY(8px)
+  }
+}
+@-webkit-keyframes shadow-pop-tr-blue {
+  0% {
+    box-shadow: 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf;
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0)
+  }
+  100% {
+    box-shadow: 1px -1px #3c4adf, 2px -2px #3c4adf, 3px -3px #3c4adf, 4px -4px #3c4adf, 5px -5px #3c4adf, 6px -6px #3c4adf, 7px -7px #3c4adf, 8px -8px #3c4adf;
+    -webkit-transform: translateX(-8px) translateY(8px);
+    transform: translateX(-8px) translateY(8px)
+  }
+}
+
+@keyframes shadow-pop-tr-blue {
+  0% {
+    box-shadow: 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf, 0 0 #3c4adf;
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0)
+  }
+  100% {
+    box-shadow: 1px -1px #3c4adf, 2px -2px #3c4adf, 3px -3px #3c4adf, 4px -4px #3c4adf, 5px -5px #3c4adf, 6px -6px #3c4adf, 7px -7px #3c4adf, 8px -8px #3c4adf;
+    -webkit-transform: translateX(-8px) translateY(8px);
+    transform: translateX(-8px) translateY(8px)
+  }
+}
 body {
   font-family: 'Rubik Mono One',
   sans-serif;
@@ -47,6 +97,14 @@ main {
   border: 3px solid papayawhip;
   background-color: black;
   transition: all linear 0.4s;
+}
+.shadow-pop-tr-yellow:hover {
+  -webkit-animation: shadow-pop-tr-yellow .3s cubic-bezier(.47, 0.000, .745, .715) both;
+  animation: shadow-pop-tr-yellow .3s cubic-bezier(.47, 0.000, .745, .715) both;
+}
+.shadow-pop-tr-blue:hover {
+  -webkit-animation: shadow-pop-tr-blue .3s cubic-bezier(.47, 0.000, .745, .715) both;
+  animation: shadow-pop-tr-blue .3s cubic-bezier(.47, 0.000, .745, .715) both;
 }
 header {
   margin: 0 auto;
