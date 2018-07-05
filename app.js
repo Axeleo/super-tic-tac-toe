@@ -4,16 +4,18 @@ console.log('XOXOXOXOX')
 var allGameBoards = document.querySelectorAll('.game-board')
 var allGameSquares = document.querySelectorAll('.game-square')
 var metaGameBoard = document.querySelector('.meta-game-board')
+var bluePlayerWinDisplay = document.querySelector('.blue-win-count')
+var yellowPlayerWinDisplay = document.querySelector('.yellow-win-count')
 var winningCombinations = [[1, 2, 3], [4, 5,6], [7, 8, 9], [1, 4, 7], [2, 5, 8],[3, 6, 9], [1, 5, 9], [3, 5, 7]]
 
 var bluePlayerNestArr = []
-var redPlayerNestArr = []
+var yellowPlayerNestArr = []
 var bluePlayerMetaArr = []
-var redPlayerMetaArr = []
-var playerBlueWinCount
-var playerRedWinCount
+var yellowPlayerMetaArr = []
+var bluePlayerWinCount = 0
+var yellowPlayerWinCount = 0
 
-var playersTurn = 'red-player'
+var playersTurn = 'yellow-player'
 
 // ------ Game logic
 
@@ -23,7 +25,7 @@ function placeToken(event) {
   if (event.target.classList.contains('game-square') === false) {
     console.log('not a game square')
     return
-  } else if (event.target.classList.contains('red') === true && event.target.classList.contains('blue') === true)  {
+  } else if (event.target.classList.contains('yellow') === true && event.target.classList.contains('blue') === true)  {
        return
   }
   
@@ -32,10 +34,10 @@ function placeToken(event) {
   var gameBoardIndex = (Number(gameBoardIdentity.dataset.board) - 1)
   var gameBoardSelect = Number(event.target.dataset.cell)
 
-  if (playersTurn === 'red-player'){
-    event.target.classList.add('red-player')
-    redPlayerNestArr[gameBoardIndex].push(gameBoardSelect)
-    checkWin(gameBoardIndex, 'red-player', redPlayerNestArr, redPlayerMetaArr)
+  if (playersTurn === 'yellow-player'){
+    event.target.classList.add('yellow-player')
+    yellowPlayerNestArr[gameBoardIndex].push(gameBoardSelect)
+    checkWin(gameBoardIndex, 'yellow-player', yellowPlayerNestArr, yellowPlayerMetaArr)
     relativeBoardSelect(gameBoardIndex, gameBoardSelect)
     playersTurn = 'blue-player'
   } else if (playersTurn === 'blue-player'){
@@ -43,7 +45,7 @@ function placeToken(event) {
     bluePlayerNestArr[gameBoardIndex].push(gameBoardSelect)
     checkWin(gameBoardIndex, 'blue-player', bluePlayerNestArr, bluePlayerMetaArr)
     relativeBoardSelect(gameBoardIndex, gameBoardSelect)
-    playersTurn = 'red-player'
+    playersTurn = 'yellow-player'
   }
 }
 
@@ -53,10 +55,12 @@ function placeToken(event) {
 function checkWin(gameBoardIndex, playerName, playerNestArr, playerMetaArr) {
   for (let index = 0; index < playerNestArr[gameBoardIndex].length; index++) {
     for (let winningIndex = 0; winningIndex < winningCombinations.length; winningIndex++) {    
-      if (playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][0]) && playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][1]) && playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][2])) {
+      if (playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][0]) 
+      && playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][1]) 
+      && playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][2])) {
         console.log(playerName + ' Victory on board ' + (gameBoardIndex + 1))
         bluePlayerNestArr[gameBoardIndex].push('finished')
-        redPlayerNestArr[gameBoardIndex].push('finished')
+        yellowPlayerNestArr[gameBoardIndex].push('finished')
         playerMetaArr.push(gameBoardIndex + 1)
         checkMetaWin(playerMetaArr, playerName)
         return
@@ -66,22 +70,31 @@ function checkWin(gameBoardIndex, playerName, playerNestArr, playerMetaArr) {
 }
 function checkMetaWin(playerMetaArr, playerName) {
   for (let winningIndex = 0; winningIndex < winningCombinations.length; winningIndex++) {
-    if (playerMetaArr.includes(winningCombinations[winningIndex][0]) && playerMetaArr.includes(winningCombinations[winningIndex][1]) && playerMetaArr.includes(winningCombinations[winningIndex][2])) {
+    if (playerMetaArr.includes(winningCombinations[winningIndex][0]) 
+    && playerMetaArr.includes(winningCombinations[winningIndex][1]) 
+    && playerMetaArr.includes(winningCombinations[winningIndex][2])) {
       console.log(playerName + ' Grand Victory')
+      if (playerName === 'blue-player'){
+        bluePlayerWinCount += 1
+        bluePlayerWinDisplay.textContent = bluePlayerWinCount
+      } else {
+        yellowPlayerWinCount +=1
+        yellowPlayerWinDisplay.textContent = yellowPlayerWinCount
+      }
     }
   }
 }
 // 3 Create a reset feature
 function removePlayerClass(object) {
   object.classList.remove('blue-player')
-  object.classList.remove('red-player')
+  object.classList.remove('yellow-player')
 }
 function resetGameArray() {
   bluePlayerNestArr = []
-  redPlayerNestArr = []
+  yellowPlayerNestArr = []
   allGameBoards.forEach(function () {
     bluePlayerNestArr.push([])
-    redPlayerNestArr.push([])
+    yellowPlayerNestArr.push([])
   })
 }
 function resetBoard() {
@@ -94,22 +107,23 @@ function initiateAllListeners() {
     allGameBoards[index].addEventListener('click', placeToken)
   }
 }
-
-// 5 Create a score board
-
-// 6 Relative board selector
+// 5 Relative board selector
 function boardFocus(gameBoardSelect) {
   for (let index = 0; index < allGameBoards.length; index++) {
     allGameBoards[index].removeEventListener('click', placeToken)
+    allGameBoards[index].classList.add('unfocus')
   }
   allGameBoards[gameBoardSelect - 1].addEventListener('click', placeToken)
+  allGameBoards[gameBoardSelect - 1].classList.remove('unfocus')
 }
 function focusUnfinishedBoards() {
   for (let index = 0; index < allGameBoards.length; index++) {
     if (bluePlayerNestArr[index].includes('finished')){
       allGameBoards[index].removeEventListener('click', placeToken)
+      llGameBoards[index].classList.add('unfocus')
     } else {
       allGameBoards[index].addEventListener('click', placeToken)
+      allGameBoards[index].classList.remove('unfocus')
     }
   }
 }
