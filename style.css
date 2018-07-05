@@ -1,6 +1,41 @@
 * {
   box-sizing: border-box;
 }
+@-moz-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+
+@-webkit-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+
+@-o-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
 @-webkit-keyframes shadow-pop-tr-yellow {
   0% {
     box-shadow: 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405, 0 0 #edc405;
@@ -113,12 +148,23 @@ header {
   display: flex;
   margin: 20px 0;
 }
+footer {
+  margin: 0 auto;
+  text-align: center;
+  margin: 15px;
+}
 .options-bar {
+  margin-right: 35px;
   display: flex;
   justify-content: center;
 }
 .options-bar div {
   padding: 1em;
+}
+.options-bar div:hover {
+  background-color: #3c4adf;
+  color: #edc405;
+  border-radius: 5%;
 }
 button {
   border: none;
@@ -130,6 +176,25 @@ button {
 }
 .yellow-player{
   background-color: #edc405;
+}
+.blue-text-gradient {
+  background: -webkit-linear-gradient(#3c4adf, whitesmoke);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent
+}
+.yellow-text-gradient {
+  background: -webkit-linear-gradient(#edc405, papayawhip);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent
+}
+
+.blue-win{
+  background: linear-gradient( #3c4adf, whitesmoke);
+  transition: all linear 4s;
+}
+.yellow-win{
+  background: linear-gradient(#edc405, papayawhip);
+  transition: all linear 4s;
 }
 .yellow-player-sideboard {
   display: flex;
@@ -203,4 +268,31 @@ h2 {
 }
 .blue-border-gradient:after {
   right: -3px;
+}
+
+/* shimmer */
+.shimmer-yellow-blue:hover {
+  text-align: center;
+  color: rgba(55, 156, 245, 0.1);
+  background: -webkit-gradient(linear, left top, right top, from(#fcf069), to(#fcf069), color-stop(0.5, #fcf069));
+  background: -moz-gradient(linear, left top, right top, from(#fcf069), to(#fcf069), color-stop(0.5, #fcf069));
+  background: gradient(linear, left top, right top, from(#fcf069), to(#fcf069), color-stop(0.5, #fcf069));
+  -webkit-background-size: 125px 100%;
+  -moz-background-size: 125px 100%;
+  background-size: 125px 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-animation-name: shimmer;
+  -moz-animation-name: shimmer;
+  animation-name: shimmer;
+  -webkit-animation-duration: 1.5s;
+  -moz-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: #5764f9;
 }

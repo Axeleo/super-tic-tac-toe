@@ -41,14 +41,12 @@ function placeToken(event) {
     checkWin(gameBoardIndex, 'yellow-player', yellowPlayerNestArr, yellowPlayerMetaArr)
     relativeBoardSelect(gameBoardSelect)
     playersTurn = 'blue-player'
-    console.log('class should be yellow')
   } else if (playersTurn === 'blue-player') {
     event.target.classList.add('blue-player')
     bluePlayerNestArr[gameBoardIndex].push(gameBoardSelect)
     checkWin(gameBoardIndex, 'blue-player', bluePlayerNestArr, bluePlayerMetaArr)
     relativeBoardSelect(gameBoardSelect)
     playersTurn = 'yellow-player'
-    console.log('class should be blue')
   }
 }
 
@@ -61,28 +59,35 @@ function checkWin(gameBoardIndex, playerName, playerNestArr, playerMetaArr) {
       if (playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][0])
         && playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][1])
         && playerNestArr[gameBoardIndex].includes(winningCombinations[winningIndex][2])) {
-        console.log(playerName + ' Victory on board ' + (gameBoardIndex + 1))
         bluePlayerNestArr[gameBoardIndex].push('finished')
         yellowPlayerNestArr[gameBoardIndex].push('finished')
         playerMetaArr.push(gameBoardIndex + 1)
-        checkMetaWin(playerMetaArr, playerName)
+        checkMetaWin(playerMetaArr, playerName, gameBoardIndex)
+        animationStart(gameBoardIndex, playerName)
         return
       }
     }
   }
 }
-function checkMetaWin(playerMetaArr, playerName) {
+function checkMetaWin(playerMetaArr, playerName, ) {
   for (let winningIndex = 0; winningIndex < winningCombinations.length; winningIndex++) {
     if (playerMetaArr.includes(winningCombinations[winningIndex][0])
       && playerMetaArr.includes(winningCombinations[winningIndex][1])
       && playerMetaArr.includes(winningCombinations[winningIndex][2])) {
-      console.log(playerName + ' Grand Victory')
       if (playerName === 'blue-player') {
         bluePlayerWinCount += 1
         bluePlayerWinDisplay.textContent = bluePlayerWinCount
+        bluePlayerWinDisplay.classList.add('blue-text-gradient')
+        for (let index = 0; index < metaGameBoard.length; index++) {
+          animationStart([i], playerName)
+        }
       } else {
         yellowPlayerWinCount += 1
         yellowPlayerWinDisplay.textContent = yellowPlayerWinCount
+        yellowPlayerWinDisplay.classList.add('yellow-text-gradient')
+        for (let index = 0; index < metaGameBoard.length; index++) {
+          animationStart([i], playerName)
+        }
       }
     }
   }
@@ -183,3 +188,56 @@ for (let index = 0; index < allGameSquares.length; index++) {
 // Call Functions 
 initiateAllListeners()
 resetGameArray()
+
+
+// win animation 
+// BUGS once three are going they share the same counter so they 'stall' each other out
+function animationStart(gameBoardIndex, playerName) {
+  animationInit = setInterval(function () {
+    addAnimation(gameBoardIndex, playerName)
+  }, 4000)
+  animationTransition = setInterval(function () {
+    removeAnimation(gameBoardIndex, playerName)
+  }, 4000)
+}
+function removeAnimation(gameBoardIndex, playerName) {
+  for (let index = 0; index < allGameBoards[gameBoardIndex].length; index++) {
+    if (playerName === 'blue-player') {
+      allGameBoards[gameBoardIndex].children[index].classList.remove('blue-win')
+    } else if (playerName === 'yellow-player') {
+      allGameBoards[gameBoardIndex].children[index].classList.remove('yellow-win')
+    }
+  }
+}
+function addAnimation(gameBoardIndex, playerName) {
+  for (let index = 0; index < allGameBoards[gameBoardIndex].length; index++) {
+    if (playerName === 'blue-player'){
+      allGameBoards[gameBoardIndex].children[index].classList.add('blue-win')
+    } else if (playerName === 'yellow-player'){
+      allGameBoards[gameBoardIndex].children[index].classList.add('yellow-win')
+    }
+  }
+}
+// var animationCounter = 0
+// function removeAnimation(gameBoardIndex, playerName) {
+//   if (playerName === 'blue-player'){
+//     allGameBoards[gameBoardIndex].children[animationCounter].classList.remove('blue-win')
+//   } else if (playerName === 'yellow-player'){
+//     allGameBoards[gameBoardIndex].children[animationCounter].classList.remove('yellow-win')
+//   }
+//   if (animationCounter === 9){
+//     animationCounter = 0
+//   }
+// }
+// function addAnimation(gameBoardIndex, playerName) {
+//   if (playerName === 'blue-player'){
+//     allGameBoards[gameBoardIndex].children[animationCounter].classList.add('blue-win')
+//     animationCounter += 1
+//   } else if (playerName === 'yellow-player'){
+//     allGameBoards[gameBoardIndex].children[animationCounter].classList.add('yellow-win')
+//     animationCounter += 1
+//   }
+//   if (animationCounter === 9){
+//     animationCounter = 0
+//   }
+// }
