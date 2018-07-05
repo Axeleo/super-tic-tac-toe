@@ -39,14 +39,14 @@ function placeToken(event) {
     event.target.classList.add('yellow-player')
     yellowPlayerNestArr[gameBoardIndex].push(gameBoardSelect)
     checkWin(gameBoardIndex, 'yellow-player', yellowPlayerNestArr, yellowPlayerMetaArr)
-    relativeBoardSelect(gameBoardIndex, gameBoardSelect)
+    relativeBoardSelect(gameBoardSelect)
     playersTurn = 'blue-player'
     console.log('class should be yellow')
   } else if (playersTurn === 'blue-player'){
     event.target.classList.add('blue-player')
     bluePlayerNestArr[gameBoardIndex].push(gameBoardSelect)
     checkWin(gameBoardIndex, 'blue-player', bluePlayerNestArr, bluePlayerMetaArr)
-    relativeBoardSelect(gameBoardIndex, gameBoardSelect)
+    relativeBoardSelect(gameBoardSelect)
     playersTurn = 'yellow-player'
     console.log('class should be blue')
   }
@@ -126,6 +126,7 @@ function boardFocus(gameBoardSelect) {
     allGameBoards[index].classList.add('unfocus')
     for (let secondIndex = 0; secondIndex < allGameBoards[index].length; secondIndex++) {
       removeHoverAnimationEffect(allGameBoards[index].children[secondIndex])
+      console.log(secondIndex)
     }
   }
   allGameBoards[gameBoardSelect - 1].addEventListener('click', placeToken)
@@ -139,8 +140,9 @@ function focusUnfinishedBoards() {
     if (bluePlayerNestArr[index].includes('finished')){
       allGameBoards[index].removeEventListener('click', placeToken)
       allGameBoards[index].classList.add('unfocus')
-      for (let index = 0; index < allGameBoards[index].length; index++) {
-        removeHoverAnimationEffect(allGameSquares[index])
+      for (let secondIndex = 0; secondIndex < allGameBoards[index].length; secondIndex++) {
+        removeHoverAnimationEffect(allGameBoards[index].children[secondIndex])
+        console.log(allGameBoards[index].children[secondIndex])
       }
     } else {
       allGameBoards[index].addEventListener('click', placeToken)
@@ -151,8 +153,8 @@ function focusUnfinishedBoards() {
     }
   }
 }
-function relativeBoardSelect(gameBoardIndex, gameBoardSelect) {
-  if (bluePlayerNestArr[gameBoardIndex].includes('finished') === true){
+function relativeBoardSelect(gameBoardSelect) {
+  if (bluePlayerNestArr[gameBoardSelect - 1].includes('finished') === true){
     focusUnfinishedBoards()
   } else {
     boardFocus(gameBoardSelect)
