@@ -244,6 +244,7 @@ function addAnimation(gameBoardIndex, playerName) {
 }
 // Call Functions 
 initiateAllListeners()
+audioOff()
 resetGameArray()
 soundButton.addEventListener('click', soundSwitch)
 instructionButton.addEventListener('click', instructionsSwitch)
