@@ -1,5 +1,9 @@
 # SUPER TIC TAC TOE
 
+### Play Here
+
+https://axeleo.github.io/super-tic-tac-toe/
+
 ## Instructions
 
 Tic tac toe with a strategic twist
