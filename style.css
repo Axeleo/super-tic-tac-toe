@@ -232,6 +232,10 @@ h3 {
 .hidden {
   display: none;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
  /* gradients  */
 .yellow-border-gradient {
   position: relative;
