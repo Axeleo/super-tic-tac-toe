@@ -20,8 +20,8 @@ var bluePlayerMetaArr = []
 var yellowPlayerMetaArr = []
 var bluePlayerWinCount = 0
 var yellowPlayerWinCount = 0
-
 var playersTurn = 'yellow-player'
+
 // AUDIO VARIABLES
 var bluePlayerSound = new Audio ('sounds/player1FX.wav')
 var yellowPlayerSound = new Audio ('sounds/player2FX.wav')
@@ -30,9 +30,7 @@ var upgradeSound = new Audio ('sounds/coinFX.wav')
 var soundTrack = new Audio('sounds/HotlineSoundTrack.wav')
 
 // ------ Game logic
-
-// 1 Create function to swap turns and place 'tokens'
-// 
+// PLACE TOKEN
 function placeToken(event) {
   if (event.target.classList.contains('game-square') === false) {
     console.log('not a game square')
@@ -61,10 +59,7 @@ function placeToken(event) {
     playersTurn = 'yellow-player'
   }
 }
-
-// 2 Create a funciton to check for wins - add visual display
-
-// Each if statement checks the 8 possible win variations on the particular game board
+// CHECK WIN
 function checkWin(gameBoardIndex, playerName, playerNestArr, playerMetaArr) {
   for (let index = 0; index < playerNestArr[gameBoardIndex].length; index++) {
     for (let winningIndex = 0; winningIndex < winningCombinations.length; winningIndex++) {
@@ -191,8 +186,6 @@ function instructionsSwitch() {
   instructionsDisplay = 'showing'
   }
 }
-soundButton.addEventListener('click', soundSwitch)
-
 function soundSwitch() {
   if (soundState === 'off'){
     audioOn()
@@ -252,6 +245,7 @@ function addAnimation(gameBoardIndex, playerName) {
 // Call Functions 
 initiateAllListeners()
 resetGameArray()
+soundButton.addEventListener('click', soundSwitch)
 instructionButton.addEventListener('click', instructionsSwitch)
 newRoundButton.addEventListener('click', resetBoards)
 for (let index = 0; index < allGameSquares.length; index++) {
