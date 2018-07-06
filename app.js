@@ -7,6 +7,8 @@ var metaGameBoard = document.querySelector('.meta-game-board')
 var bluePlayerWinDisplay = document.querySelector('.blue-win-count')
 var yellowPlayerWinDisplay = document.querySelector('.yellow-win-count')
 var winningCombinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+var soundButton = document.querySelector('#sound-btn')
+var soundState = 'off'
 
 var bluePlayerNestArr = []
 var yellowPlayerNestArr = []
@@ -16,6 +18,12 @@ var bluePlayerWinCount = 0
 var yellowPlayerWinCount = 0
 
 var playersTurn = 'yellow-player'
+// AUDIO VARIABLES
+var bluePlayerSound = new Audio ('sounds/player1FX.wav')
+var yellowPlayerSound = new Audio ('sounds/player2FX.wav')
+var winSound = new Audio ('sounds/winFX.wav')
+var upgradeSound = new Audio ('sounds/coinFX.wav')
+var soundTrack = new Audio('sounds/HotlineSoundTrack.wav')
 
 // ------ Game logic
 
@@ -29,8 +37,6 @@ function placeToken(event) {
     event.target.classList.contains('blue-player') === true) {
     return
   }
-
-
   var gameBoardIdentity = event.target.parentNode
   var gameBoardIndex = (Number(gameBoardIdentity.dataset.board) - 1)
   var gameBoardSelect = Number(event.target.dataset.cell)
@@ -40,12 +46,14 @@ function placeToken(event) {
     yellowPlayerNestArr[gameBoardIndex].push(gameBoardSelect)
     checkWin(gameBoardIndex, 'yellow-player', yellowPlayerNestArr, yellowPlayerMetaArr)
     relativeBoardSelect(gameBoardSelect)
+    bluePlayerSound.play()
     playersTurn = 'blue-player'
   } else if (playersTurn === 'blue-player') {
     event.target.classList.add('blue-player')
     bluePlayerNestArr[gameBoardIndex].push(gameBoardSelect)
     checkWin(gameBoardIndex, 'blue-player', bluePlayerNestArr, bluePlayerMetaArr)
     relativeBoardSelect(gameBoardSelect)
+    yellowPlayerSound.play()
     playersTurn = 'yellow-player'
   }
 }
@@ -63,6 +71,7 @@ function checkWin(gameBoardIndex, playerName, playerNestArr, playerMetaArr) {
         yellowPlayerNestArr[gameBoardIndex].push('finished')
         playerMetaArr.push(gameBoardIndex + 1)
         checkMetaWin(playerMetaArr, playerName, gameBoardIndex)
+        upgradeSound.play()
         animationStart(gameBoardIndex, playerName)
         return
       }
@@ -78,6 +87,7 @@ function checkMetaWin(playerMetaArr, playerName, ) {
         bluePlayerWinCount += 1
         bluePlayerWinDisplay.textContent = bluePlayerWinCount
         bluePlayerWinDisplay.classList.add('blue-text-gradient')
+        winSound.play()
         for (let index = 0; index < metaGameBoard.length; index++) {
           animationStart([i], playerName)
         }
@@ -85,6 +95,7 @@ function checkMetaWin(playerMetaArr, playerName, ) {
         yellowPlayerWinCount += 1
         yellowPlayerWinDisplay.textContent = yellowPlayerWinCount
         yellowPlayerWinDisplay.classList.add('yellow-text-gradient')
+        winSound.play()
         for (let index = 0; index < metaGameBoard.length; index++) {
           animationStart([i], playerName)
         }
@@ -188,8 +199,37 @@ for (let index = 0; index < allGameSquares.length; index++) {
 // Call Functions 
 initiateAllListeners()
 resetGameArray()
+// Sounds
+soundButton.addEventListener('click', soundSwitch)
 
-
+function soundSwitch() {
+  if (soundState === 'off'){
+    audioOn()
+    soundState = 'on'
+    soundButton.textContent = 'SOUND OFF'
+  } else if (soundState === 'on'){
+    audioOff()
+    soundState = 'off'
+    soundButton.textContent = 'SOUND ON'
+  }
+}
+function audioOn() {
+  soundTrack.play()
+  soundTrack.loop = true
+  bluePlayerSound.muted = false
+  yellowPlayerSound.muted = false
+  winSound.muted = false
+  upgradeSound.muted = false
+  soundTrack.muted = false
+}
+function audioOff() {
+  soundTrack.pause()
+  bluePlayerSound.muted = true
+  yellowPlayerSound.muted = true
+  winSound.muted = true
+  upgradeSound.muted = true
+  soundTrack.muted = true
+}
 // win animation 
 // BUGS once three are going they share the same counter so they 'stall' each other out
 function animationStart(gameBoardIndex, playerName) {

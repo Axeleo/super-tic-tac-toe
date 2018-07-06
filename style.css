@@ -161,7 +161,8 @@ footer {
 .options-bar div {
   padding: 1em;
 }
-.options-bar div:hover {
+.options-bar :first-child:hover,
+.options-bar :last-child:hover {
   background-color: #3c4adf;
   color: #edc405;
   border-radius: 5%;
@@ -178,16 +179,15 @@ button {
   background-color: #edc405;
 }
 .blue-text-gradient {
-  background: -webkit-linear-gradient(#3c4adf, whitesmoke);
+  background: -webkit-linear-gradient(whitesmoke, #3c4adf);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent
 }
 .yellow-text-gradient {
-  background: -webkit-linear-gradient(#edc405, papayawhip);
+  background: -webkit-linear-gradient(papayawhip, #edc405);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent
 }
-
 .blue-win{
   background: linear-gradient( #3c4adf, whitesmoke);
   transition: all linear 4s;
