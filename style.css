@@ -216,11 +216,21 @@ button {
 h2 {
   font-size: 1.6em;
 }
+h3 {
+  font-size: 1.4em;
+}
+.instructions{
+  background-color: whitesmoke;
+  color: black;
+  text-align: center;
+  padding: 10px;
+  width: 560px;
+}
 .unfocus {
   opacity: 0.6;
 }
 .hidden {
-  display: hidden
+  display: none;
 }
  /* gradients  */
 .yellow-border-gradient {

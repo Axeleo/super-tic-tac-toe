@@ -7,6 +7,10 @@ var metaGameBoard = document.querySelector('.meta-game-board')
 var bluePlayerWinDisplay = document.querySelector('.blue-win-count')
 var yellowPlayerWinDisplay = document.querySelector('.yellow-win-count')
 var winningCombinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+var instructionButton = document.querySelector('.instructions-btn')
+var instructions = document.querySelector('.instructions')
+var newRoundButton = document.querySelector('.new-round-btn')
+instructionsDisplay = 'hidden'
 var soundButton = document.querySelector('#sound-btn')
 var soundState = 'off'
 
@@ -109,11 +113,6 @@ function removePlayerClass(object) {
   object.classList.remove('yellow-player')
   object.classList.remove('unfocus')
 }
-// function removeHoverAnimationEffect() {
-//   square.classList.remove('shadow-pop-tr-blue')
-//   square.classList.remove('shadow-pop-tr-yellow')
-//   square.removeEventListener('mouseover', hoverAnimation)
-// }
 function removeAllHoverAnimationClass() {
   for (let index = 0; index < allGameSquares.length; index++) {
     allGameSquares[index].classList.remove('shadow-pop-tr-blue')
@@ -123,12 +122,14 @@ function removeAllHoverAnimationClass() {
 function resetGameArray() {
   bluePlayerNestArr = []
   yellowPlayerNestArr = []
-  allGameBoards.forEach(function () {
+  allGameBoards.forEach(function (boards) {
     bluePlayerNestArr.push([])
     yellowPlayerNestArr.push([])
+    boards.classList.remove('unfocus')
   })
+  initiateAllListeners()
 }
-function resetBoard() {
+function resetBoards() {
   allGameSquares.forEach(removePlayerClass)
   resetGameArray()
   for (let index = 0; index < allGameSquares.length; index++) {
@@ -147,16 +148,9 @@ function boardFocus(gameBoardSelect) {
     allGameBoards[index].removeEventListener('click', placeToken)
     allGameBoards[index].classList.add('unfocus')
     removeAllHoverAnimationClass()
-    // for (let secondIndex = 0; secondIndex < allGameBoards[index].length; secondIndex++) {
-    //   removeHoverAnimationEffect(allGameBoards[index].children[secondIndex])
-    //   console.log(secondIndex)
-    // }
   }
   allGameBoards[gameBoardSelect - 1].addEventListener('click', placeToken)
   allGameBoards[gameBoardSelect - 1].classList.remove('unfocus')
-  // for (let thirdIndex = 0; thirdIndex < allGameBoards[gameBoardSelect - 1].length; thirdIndex++) {
-  //   allGameBoards[index].children[thirdIndex].addEventListener('mouseover', hoverAnimation)
-  // }
 }
 function focusUnfinishedBoards() {
   for (let index = 0; index < allGameBoards.length; index++) {
@@ -164,16 +158,9 @@ function focusUnfinishedBoards() {
       allGameBoards[index].removeEventListener('click', placeToken)
       allGameBoards[index].classList.add('unfocus')
       removeAllHoverAnimationClass()
-      // for (let secondIndex = 0; secondIndex < allGameBoards[index].length; secondIndex++) {
-      //   removeHoverAnimationEffect(allGameBoards[index].children[secondIndex])
-      //   console.log(allGameBoards[index].children[secondIndex])
-      // }
     } else {
       allGameBoards[index].addEventListener('click', placeToken)
       allGameBoards[index].classList.remove('unfocus')
-      // for (let index = 0; index < allGameBoards[index].length; index++) {
-      //   allGameSquares[index].addEventListener('mouseover', hoverAnimation)
-      // }
     }
   }
 }
@@ -193,13 +180,17 @@ function hoverAnimation(event) {
     event.target.classList.add('shadow-pop-tr-yellow')
   }
 }
-for (let index = 0; index < allGameSquares.length; index++) {
-  allGameSquares[index].addEventListener('mouseover', hoverAnimation)
+function instructionsSwitch() {
+  if (instructionsDisplay === 'showing'){
+    metaGameBoard.classList.remove('hidden')
+    instructions.classList.add('hidden')
+    instructionsDisplay = 'hidden'
+  } else if (instructionsDisplay === 'hidden'){
+  metaGameBoard.classList.add('hidden')
+  instructions.classList.remove('hidden')
+  instructionsDisplay = 'showing'
+  }
 }
-// Call Functions 
-initiateAllListeners()
-resetGameArray()
-// Sounds
 soundButton.addEventListener('click', soundSwitch)
 
 function soundSwitch() {
@@ -257,6 +248,14 @@ function addAnimation(gameBoardIndex, playerName) {
       allGameBoards[gameBoardIndex].children[index].classList.add('yellow-win')
     }
   }
+}
+// Call Functions 
+initiateAllListeners()
+resetGameArray()
+instructionButton.addEventListener('click', instructionsSwitch)
+newRoundButton.addEventListener('click', resetBoards)
+for (let index = 0; index < allGameSquares.length; index++) {
+  allGameSquares[index].addEventListener('mouseover', hoverAnimation)
 }
 // var animationCounter = 0
 // function removeAnimation(gameBoardIndex, playerName) {
