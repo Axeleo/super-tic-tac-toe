@@ -34,9 +34,11 @@ I was attempting to remove the sqaure pop effect on the blocks when they were no
 
 Play testing was a little time consuming as the games can go on for a while.
 
-### Unresolved issues
+### Known issues
 
-Another issue I ran into was creating a nice win effect for a board  with js. I ended up going with a janky kind of for loop which would increment which block it was effecting by a set interval. A continuing problem with this feature was that all the boards were sharing the same counter and because all the animations were on the same counter the timings would change and occasionally stall depending on how many boards were active at once.
+Score counter not working correctly.
+
+One issue I ran into was creating a nice win effect animation on a board with js. I ended up going with a janky kind of for loop which would increment which block it was effecting by a set interval. A continuing problem with this feature was that all the boards were sharing the same counter and because all the animations were on the same counter the timings would change and occasionally stall depending on how many boards were active at once.
 
 
 ## Credits
